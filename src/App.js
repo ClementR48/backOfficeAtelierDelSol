@@ -13,7 +13,7 @@ import axios from 'axios'
 function App() {
 
   const [items, setItems] = useState([])
-  console.log(items);
+ 
  
 
   const fetchData = () => {
@@ -25,6 +25,7 @@ function App() {
   useEffect(() => {
     fetchData()
   }, [])
+
   return (
     <div className="App">
       <BrowserRouter>
