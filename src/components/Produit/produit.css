@@ -1,0 +1,43 @@
+.produit {
+  background-color: antiquewhite;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1fr ;
+  place-items: center;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.produit:hover{
+  background-color: black;
+}
+
+.produit:hover h3, .produit:hover p, .produit:hover svg {
+  color: antiquewhite;
+}
+
+.produit img {
+  width: 75px;
+  border-radius: 50%;
+}
+
+.produit p {
+  margin: 0;
+}
+
+.produit h3 {
+  margin: 0;
+}
+
+.produit svg {
+  cursor: pointer;
+}
+
+.produit .trash:hover {
+  fill: red;
+  stroke-width: 3px;
+}
+
+.produit .edit:hover {
+  fill: yellow;
+  stroke-width: 3px;
+}
