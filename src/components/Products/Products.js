@@ -10,9 +10,9 @@ const Products = ({ items }) => {
 
   return (
     <div className="products">
-      <button>
-        <Link to="/ajout">Ajoute un produit</Link>
-      </button>
+        
+        <Link className="button-add" to="/ajout">Ajoute un produit</Link>
+     
       <ul className="liste">
         <li className='entete'>
            <span>Image</span>

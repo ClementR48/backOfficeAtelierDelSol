@@ -1,9 +1,10 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { Button, Form } from 'semantic-ui-react'
 import axios from 'axios'
 import { useState } from 'react'
 
-import "./AddProduct.css"
+import './AddProduct.css'
 
 const AddProduct = () => {
   const [titre, setTitre] = useState('')
@@ -18,21 +19,53 @@ const AddProduct = () => {
   const [prix, setPrix] = useState('')
   const [quantite, setQuantite] = useState('')
 
+  let location = useHistory()
+
+  const validationImage = (value, className, element) => {
+    let regexUrl =
+      '^(?:(?:http(?:s)?|ftp)://)(?:\\S+(?::(?:\\S)*)?@)?(?:(?:[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-\uffff])+)(?:\\.(?:[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-\uffff])+)*(?:\\.(?:[a-z0-9\u00a1-\uffff]){2,})(?::(?:\\d){2,5})?(?:/(?:\\S)*)?$'
+
+    if (!value.match(regexUrl)) {
+      let imageElement = document.querySelector(className)
+      imageElement.style.color = 'red'
+      alert(element + 'doit être en url ')
+
+      return false
+    } else {
+      return true
+    }
+  }
+
+  const verification = () => {
+    if (
+      titre &&
+      description &&
+      image &&
+      first &&
+      seconde &&
+      third &&
+      categorie &&
+      hauteur &&
+      largeur &&
+      prix &&
+      quantite
+    ) {
+      if (
+        validationImage(image,'.image',"L'image principale ") && validationImage(first, '.image1', 'La premiere image ') 
+        
+      ) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      alert('tous les champs doivent etre remplis')
+      return false
+    }
+  }
+
   const post = () => {
-    if (titre.length < 8) {
-      console.log('le titre est trop court')
-    }
-    if (isNaN(hauteur)) {
-      console.log('hauteur pas bonne')
-    }
-    if (isNaN(largeur)) {
-      console.log('largeur pas bonne')
-    }
-    if (isNaN(prix)) {
-      console.log('prix pas bonne')
-    }
-    if (isNaN(quantite)) {
-      console.log('quantite pas bonne')
+    if (verification() === false) {
     } else {
       axios
         .post('http://localhost:5500/products', {
@@ -44,6 +77,7 @@ const AddProduct = () => {
             seconde: seconde,
             third: third,
           },
+
           categorie: categorie,
           dimensions: {
             hauteur: hauteur,
@@ -53,14 +87,20 @@ const AddProduct = () => {
           quantite: quantite,
         })
         .then(function (response) {
-          console.log(response)
+          alert('Le produit a bien été enregistré')
         })
-        .catch(function (error) {})
+        .then(function () {
+          return location.push('/')
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
   }
 
   return (
-    <Form className="form"
+    <Form
+      className="form"
       onSubmit={(event) => {
         event.preventDefault()
         post()
@@ -87,7 +127,7 @@ const AddProduct = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>image principale</label>
+        <label className="image">image principale </label>
         <input
           placeholder="image"
           defaultValue={image}
@@ -97,7 +137,7 @@ const AddProduct = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>Mini image</label>
+        <label className="image1">Mini image</label>
         <input
           placeholder="image"
           defaultValue={first}

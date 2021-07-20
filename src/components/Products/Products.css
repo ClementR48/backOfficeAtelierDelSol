@@ -4,7 +4,10 @@
   position: relative;
 }
 
-.products button {
+
+
+.products .button-add {
+  color: black;
   padding: 17px 17px;
   border-radius: 10%;
   background-color: antiquewhite;
@@ -12,22 +15,14 @@
   position: absolute;
   top: 0;
   right: 0;
-  
 }
 
-.products button a {
-  color: black;
-  width: 100%;
-  height: 100%;
-}
-
-.products button:hover {
+.products .button-add:hover {
   background-color: black;
-}
-
-.products button:hover a {
   color: antiquewhite;
 }
+
+
 
 .products .liste {
   list-style: none;

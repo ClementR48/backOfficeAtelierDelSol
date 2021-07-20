@@ -20,10 +20,11 @@ const ModifyProduct = ({ items }) => {
   const [prix, setPrix] = useState('')
   const [quantite, setQuantite] = useState('') 
 
+
   const { id } = useParams();
   let idNumber = id;
 
-  const error = useHistory()
+  const location = useHistory()
  
   
   const produit = items.find(product => product._id === idNumber)
@@ -33,11 +34,13 @@ const ModifyProduct = ({ items }) => {
       titre: titre,
           description: description,
           image: image,
-          miniImage: {
+          miniImage :{
             first: first,
             seconde: seconde,
             third: third,
           },
+            
+          
           categorie: categorie,
           dimensions: {
             hauteur: hauteur,
@@ -46,6 +49,13 @@ const ModifyProduct = ({ items }) => {
           prix: prix,
           quantite: quantite,
         })
+        .then(function (res) {
+          alert('Votre produit a été modifié')
+        })
+        .then(function()  {return location.push('/')})
+        .catch(function (err) {
+          console.log(err, 'pas bon');
+        })
         
     }
   
@@ -53,7 +63,7 @@ const ModifyProduct = ({ items }) => {
   useEffect(() => {
     
     if(!produit){
-      return error.push('/')
+      return location.push('/')
         
     }
     setItem(produit)
@@ -63,6 +73,11 @@ const ModifyProduct = ({ items }) => {
     setImage(item.image)
     setPrix(item.prix)
     setQuantite(item.quantite)    
+    setFirst(item.first)
+    setSeconde(item.seconde)
+    setThird(item.third)
+   
+    
     
 
   }, [item])
@@ -113,21 +128,21 @@ const ModifyProduct = ({ items }) => {
         <label>Mini image</label>
         <input
           placeholder="image"
-          defaultValue={item.first}
+          defaultValue={item.miniImage.first}
           onChange={(event) => {
-            setFirst(event.target.value)
+           setFirst(event.target.value)
           }}
         />
         <input
           placeholder="image"
-          defaultValue={item.seconde}
+          defaultValue={item.miniImage.seconde}
           onChange={(event) => {
             setSeconde(event.target.value)
           }}
         />
         <input
           placeholder="image"
-          defaultValue={item.third}
+          defaultValue={item.miniImage.third}
           onChange={(event) => {
             setThird(event.target.value)
           }}

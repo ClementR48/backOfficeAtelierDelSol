@@ -32,12 +32,20 @@
   cursor: pointer;
 }
 
+.produit .trash {
+  color: red;
+}
+
+.produit .edit {
+  color: yellow;
+}
+
 .produit .trash:hover {
   fill: red;
-  stroke-width: 3px;
+  stroke-width: 2px;
 }
 
 .produit .edit:hover {
   fill: yellow;
-  stroke-width: 3px;
+  stroke-width: 2px;
 }

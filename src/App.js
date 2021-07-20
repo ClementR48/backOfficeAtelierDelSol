@@ -10,6 +10,8 @@ import ModifyProduct from './components/ModifyProduct/ModifyProduct'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
+import './app.css'
+
 function App() {
 
   const [items, setItems] = useState([])
@@ -27,7 +29,7 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
+    <div className="app">
       <BrowserRouter>
         <Navigation />
         <Switch>
