@@ -72,17 +72,17 @@ const AddProduct = () => {
           titre: titre,
           description: description,
           image: image,
-          miniImage: {
+          
             first: first,
             seconde: seconde,
             third: third,
-          },
+          
 
           categorie: categorie,
-          dimensions: {
+          
             hauteur: hauteur,
             largeur: largeur,
-          },
+          
           prix: prix,
           quantite: quantite,
         })

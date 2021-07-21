@@ -28,24 +28,25 @@ const ModifyProduct = ({ items }) => {
  
   
   const produit = items.find(product => product._id === idNumber)
+  console.log(produit);
   
   const modify = () => {
     axios.put(`http://localhost:5500/products/${item._id}`, {
       titre: titre,
           description: description,
           image: image,
-          miniImage :{
+          
             first: first,
             seconde: seconde,
             third: third,
-          },
+          
             
           
           categorie: categorie,
-          dimensions: {
+          
             hauteur: hauteur,
             largeur: largeur,
-          },
+          
           prix: prix,
           quantite: quantite,
         })
@@ -54,7 +55,7 @@ const ModifyProduct = ({ items }) => {
         })
         .then(function()  {return location.push('/')})
         .catch(function (err) {
-          console.log(err, 'pas bon');
+          alert("ERROR: votre produit n'a pas pu être enregistré")
         })
         
     }
@@ -65,8 +66,8 @@ const ModifyProduct = ({ items }) => {
     if(!produit){
       return location.push('/')
         
-    }
-    setItem(produit)
+    }else {
+      setItem(produit)
     setTitre(item.titre)
     setDescription(item.description)
     setCategorie(item.categorie)
@@ -76,6 +77,10 @@ const ModifyProduct = ({ items }) => {
     setFirst(item.first)
     setSeconde(item.seconde)
     setThird(item.third)
+    setHauteur(item.hauteur)
+    setLargeur(item.largeur)
+    }
+    
    
     
     
@@ -83,122 +88,127 @@ const ModifyProduct = ({ items }) => {
   }, [item])
 
 
-
-
-
-   return (
+  if(item !== undefined) {
+    return (
      
-   <Form className="modify"
-      onSubmit={(event) => {
-        event.preventDefault()
-        modify()
-      }}
-    >
-      <Form.Field>
-        <label>Titre</label>
-        <input
-          placeholder="titre"
-          defaultValue={item.titre}
-          onChange={(event) => {
-            setTitre(event.target.value)
-          }}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Description</label>
-        <input
-          placeholder="Description"
-          defaultValue={item.description}
-          onChange={(event) => {
-            setDescription(event.target.value)
-          }}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>image principale</label>
-        <input
-          placeholder="image"
-          defaultValue={item.image}
-          onChange={(event) => {
-            setImage(event.target.value)
-          }}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Mini image</label>
-        <input
-          placeholder="image"
-          defaultValue={item.miniImage.first}
-          onChange={(event) => {
-           setFirst(event.target.value)
-          }}
-        />
-        <input
-          placeholder="image"
-          defaultValue={item.miniImage.seconde}
-          onChange={(event) => {
-            setSeconde(event.target.value)
-          }}
-        />
-        <input
-          placeholder="image"
-          defaultValue={item.miniImage.third}
-          onChange={(event) => {
-            setThird(event.target.value)
-          }}
-        />
-      </Form.Field>  
-      <Form.Field>
-        <label>Categorie</label>
-        <input
-          placeholder="Categorie"
-          defaultValue={item.categorie}
-          onChange={(event) => {
-            setCategorie(event.target.value)
-          }}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Dimensions</label>
-        <input
-          placeholder="Hauteur"
-          defaultValue={item.hauteur}
-          onChange={(event) => {
-            setHauteur(event.target.value)
-          }}
-        />
-        <input
-          placeholder="Largeur"
-          defaultValue={item.largeur}
-          onChange={(event) => {
-            setLargeur(event.target.value)
-          }}
-        />
-      </Form.Field> 
-      <Form.Field>
-        <label>Prix</label>
-        <input
-          placeholder="Prix"
-          defaultValue={item.prix}
-          onChange={(event) => {
-            setPrix(event.target.value)
-          }}
-        />
-      </Form.Field> 
-      <Form.Field>
-        <label>Quantite</label>
-        <input
-          placeholder="Quantité"
-          defaultValue={item.quantite}
-          onChange={(event) => {
-            setQuantite(event.target.value)
-          }}
-        />
-      </Form.Field>
+      <Form className="modify"
+         onSubmit={(event) => {
+           event.preventDefault()
+           modify()
+         }}
+       >
+         <Form.Field>
+           <label>Titre</label>
+           <input
+             placeholder="titre"
+             defaultValue={item.titre}
+             onChange={(event) => {
+               setTitre(event.target.value)
+             }}
+           />
+         </Form.Field>
+         <Form.Field>
+           <label>Description</label>
+           <input
+             placeholder="Description"
+             defaultValue={item.description}
+             onChange={(event) => {
+               setDescription(event.target.value)
+             }}
+           />
+         </Form.Field>
+         <Form.Field>
+           <label>image principale</label>
+           <input
+             placeholder="image"
+             defaultValue={item.image}
+             onChange={(event) => {
+               setImage(event.target.value)
+             }}
+           />
+         </Form.Field>
+         <Form.Field>
+           <label>Mini image</label>
+           <input
+             placeholder="image"
+             defaultValue={item.first}
+             onChange={(event) => {
+              setFirst(event.target.value)
+             }}
+           />
+           <input
+             placeholder="image"
+             defaultValue={item.seconde}
+             onChange={(event) => {
+               setSeconde(event.target.value)
+             }}
+           />
+           <input
+             placeholder="image"
+             defaultValue={item.third}
+             onChange={(event) => {
+               setThird(event.target.value)
+             }}
+           />
+         </Form.Field>  
+         <Form.Field>
+           <label>Categorie</label>
+           <input
+             placeholder="Categorie"
+             defaultValue={item.categorie}
+             onChange={(event) => {
+               setCategorie(event.target.value)
+             }}
+           />
+         </Form.Field>
+         <Form.Field>
+           <label>Dimensions</label>
+           <input
+             placeholder="Hauteur"
+             defaultValue={item.hauteur}
+             onChange={(event) => {
+               setHauteur(event.target.value)
+             }}
+           />
+           <input
+             placeholder="Largeur"
+             defaultValue={item.largeur}
+             onChange={(event) => {
+               setLargeur(event.target.value)
+             }}
+           />
+         </Form.Field> 
+         <Form.Field>
+           <label>Prix</label>
+           <input
+             placeholder="Prix"
+             defaultValue={item.prix}
+             onChange={(event) => {
+               setPrix(event.target.value)
+             }}
+           />
+         </Form.Field> 
+         <Form.Field>
+           <label>Quantite</label>
+           <input
+             placeholder="Quantité"
+             defaultValue={item.quantite}
+             onChange={(event) => {
+               setQuantite(event.target.value)
+             }}
+           />
+         </Form.Field>
+   
+         <Button type="submit">Modifier</Button>
+       </Form>
+     ); 
+  } else{
+    return <div>ok</div>
+      
+  }
 
-      <Button type="submit">Modifier</Button>
-    </Form>
-  ); 
+  
+ 
   
 };
 
